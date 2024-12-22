@@ -26,26 +26,26 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 36, // Bigger font size
+    fontSize: 36, 
     color: 'white',
     fontWeight: 'bold',
-    alignSelf: 'center', // Align to the left
-    marginTop: 400, // Adjusts the vertical position (lower from the top)
+    alignSelf: 'center', 
+    marginTop: 400, 
 
-    marginBottom: 10, // Space below the title
+    marginBottom: 10,
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: 'center', // Center buttons vertically
-    alignItems: 'center', // Center buttons horizontally
+    justifyContent: 'center', 
+    alignItems: 'center', 
   },
   button: {
-    width: '80%', // Equal width for both buttons
+    width: '80%', 
     backgroundColor: 'white',
-    paddingVertical: 15, // Button height
-    borderRadius: 10, // Rounded corners
-    marginBottom: 20, // Space between buttons
-    alignItems: 'center', // Center text inside the button
+    paddingVertical: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+    alignItems: 'center', 
   },
   buttonText: {
     fontSize: 18,
