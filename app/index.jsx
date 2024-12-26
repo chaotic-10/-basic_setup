@@ -1,10 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
-// import HomeScreen from "./Homescreen";
-import Register from "./(auth)/register";
+
+import Layout from "./(auth)/_layout"; 
 
 const index = () => {
-  return <Register />;
+  return  <Layout />
+
+  
 };
 
 export default index;

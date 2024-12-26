@@ -1,10 +1,24 @@
-import { Stack } from "expo-router";
+import HomeScreen from "../Homescreen"
+import Login from "./login"
+import Register from "./register"
+// import { NavigationContainer } from "@react-navigation/native";
 
-export default function Layout() {
+import { createStackNavigator } from "@react-navigation/stack";
+
+
+const Stack = createStackNavigator();
+
+
+const Layout = () => {
   return (
-    <Stack>
-      <Stack.Screen name="login" options={{ headerShown: false }} />
-      <Stack.Screen name="register" options={{ headerShown: false }} />
-    </Stack>
+  
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Login" component={Login}  options={{ headerShown: false }}/>
+      <Stack.Screen name="Register" component={Register}  options={{ headerShown: false }}/>
+    </Stack.Navigator>
+
   );
-}
+};
+
+export default Layout;
