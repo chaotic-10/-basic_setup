@@ -1,14 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 const RegisterScreen = () => {
+  // State for input fields
+  const [username, setUsername] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+
+  // Function to handle register button click
+  const handleRegister = async () => {
+    // Data to send
+    const payload = {
+      username,
+      phoneNumber,
+      email,
+    };
+
+    // Validate input
+    if (!username || !phoneNumber || !email) {
+      Alert.alert("Validation Error", "All fields are required!");
+      return;
+    }
+
+    try {
+      const response = await fetch("https://example.com/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        Alert.alert("Success", "You have been registered successfully!");
+        // Optionally reset the fields
+        setUsername("");
+        setPhoneNumber("");
+        setEmail("");
+      } else {
+        Alert.alert("Error", data.message || "Something went wrong!");
+      }
+    } catch (error) {
+      Alert.alert("Error", "Failed to connect to the server!");
+    }
+  };
+
   return (
     <View style={styles.container}>
       {/* Curved Background */}
@@ -25,6 +71,8 @@ const RegisterScreen = () => {
             placeholder="Username"
             placeholderTextColor="white"
             style={styles.input}
+            value={username}
+            onChangeText={setUsername}
           />
         </View>
 
@@ -36,6 +84,8 @@ const RegisterScreen = () => {
             placeholderTextColor="white"
             style={styles.input}
             keyboardType="phone-pad"
+            value={phoneNumber}
+            onChangeText={setPhoneNumber}
           />
         </View>
 
@@ -47,12 +97,14 @@ const RegisterScreen = () => {
             placeholderTextColor="white"
             style={styles.input}
             keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
           />
         </View>
       </View>
 
       {/* Register Button */}
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
@@ -92,8 +144,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 20,
-    borderBottomWidth: 1.5, // Thin underline
-    borderBottomColor: "#ffffffaa", // Blurred effect with transparency
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#ffffffaa",
     paddingBottom: 5,
   },
   input: {
@@ -109,13 +161,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 20,
     alignItems: "center",
-    shadowColor: "#540bdf", // Shadow color
+    shadowColor: "#540bdf",
     shadowOffset: { width: 5, height: 5 },
     shadowOpacity: 0.4,
     shadowRadius: 10,
     elevation: 10,
   },
-
   buttonText: {
     color: "#540bdf",
     fontSize: 18,
